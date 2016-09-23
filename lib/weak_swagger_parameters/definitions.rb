@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+require 'weak_swagger_parameters/definitions/body_params/boolean'
+require 'weak_swagger_parameters/definitions/body_params/integer'
+require 'weak_swagger_parameters/definitions/body_params/string'
+require 'weak_swagger_parameters/definitions/path_params/integer'
+require 'weak_swagger_parameters/definitions/path_params/string'
+require 'weak_swagger_parameters/definitions/query_params/string'
+require 'weak_swagger_parameters/definitions/body'
+require 'weak_swagger_parameters/definitions/path'
+require 'weak_swagger_parameters/definitions/query'
+require 'weak_swagger_parameters/definitions/params'
+require 'weak_swagger_parameters/definitions/response'
+require 'weak_swagger_parameters/definitions/api'

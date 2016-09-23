@@ -1,0 +1,114 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "The test api",
+    "description": "Test api description"
+  },
+  "host": "localhost:1234",
+  "basePath": "",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tests": {
+      "post": {
+        "operationId": "postTests",
+        "summary": "Create test",
+        "parameters": [
+          {
+            "name": "short_name",
+            "type": "string",
+            "in": "path",
+            "description": "Short test name"
+          },
+          {
+            "name": "count",
+            "type": "integer",
+            "format": "int32",
+            "in": "path",
+            "description": "Count of tests"
+          },
+          {
+            "name": "token",
+            "type": "string",
+            "in": "query",
+            "description": "The token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": [
+                "boolean_required",
+                "string_required",
+                "integer_required"
+              ],
+              "properties": {
+                "subject": {
+                  "type": "string",
+                  "description": "The unit under test"
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The context of the test"
+                },
+                "runs": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Run times"
+                },
+                "passed": {
+                  "type": "boolean",
+                  "description": "Passed"
+                },
+                "boolean_required": {
+                  "type": "boolean",
+                  "description": "Boolean required"
+                },
+                "string_required": {
+                  "type": "string",
+                  "description": "String required"
+                },
+                "integer_required": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Integer required"
+                },
+                "string_enum": {
+                  "type": "string",
+                  "description": "String enum",
+                  "enum": [
+                    "a",
+                    "b",
+                    "c"
+                  ]
+                },
+                "string_default": {
+                  "type": "string",
+                  "description": "String default",
+                  "default": "origin"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created the test"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "tags": [
+          "Tests"
+        ]
+      }
+    }
+  }
+}
