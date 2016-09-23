@@ -37,18 +37,19 @@ module WeakSwaggerParameters
 
       def apply_docs(controller_class)
         child_definitions = @child_definitions
-        summary = @summary
-        description = @description
-        method = http_method
         path = @path
-        name = controller_class.controller_name.humanize
+        method = http_method
+        name = resource_name(controller_class)
+        operation_params = Hash.new
+        operation_params.merge!(summary: @summary)
+        operation_params.merge!(operationId: operation_id(method, name))
+        operation_params.merge!(description: @description) unless @description.blank?
+        operation_params.merge!(tags: [name])
 
         controller_class.instance_eval do
           swagger_path path do
-            operation method, operationId: "#{method}#{name}", summary: summary do
+            operation method, operation_params do
               child_definitions.each { |definition| definition.apply_docs(self) }
-              key :description, description unless description.blank?
-              key :tags, [name]
             end
           end
         end
@@ -56,15 +57,25 @@ module WeakSwaggerParameters
 
       private
 
-      def http_method
-        {
-          create: :post,
-          index: :get,
-          show: :get,
-          destroy: :delete,
-          update: :put
-        }[@method]
-      end
+        def http_method
+          known_methods = {
+              create: :post,
+              index: :get,
+              show: :get,
+              destroy: :delete,
+              update: :put
+          }
+
+          known_methods[@method]
+        end
+
+        def resource_name(controller_class)
+          controller_class.controller_name.humanize
+        end
+
+        def operation_id(method, name)
+          "#{method}#{name}"
+        end
     end
   end
 end
