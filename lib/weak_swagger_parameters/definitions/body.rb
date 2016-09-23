@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 module WeakSwaggerParameters
   module Definitions
-    class Body
+    class Body < ParamContainer
       def initialize(&block)
-        @child_definitions = []
         @required_fields = []
-        instance_eval(&block)
+        super
       end
 
       def string(name, description, options = {})
@@ -21,10 +20,6 @@ module WeakSwaggerParameters
       def integer(name, description, options = {})
         @required_fields << name if options.try(:[], :required)
         @child_definitions << WeakSwaggerParameters::Definitions::BodyParam.new(:integer, name, description, options)
-      end
-
-      def apply_validations(parent_node)
-        @child_definitions.each { |definition| definition.apply_validations(parent_node) }
       end
 
       def apply_docs(parent_node)
