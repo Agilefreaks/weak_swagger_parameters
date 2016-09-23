@@ -6,7 +6,8 @@ module WeakSwaggerParameters
         @method = method
         @path = path
         @summary = summary
-        @child_definitions = []
+        @param_definition = nil
+        @response_definitions = []
         @description = nil
 
         instance_eval(&block)
@@ -17,15 +18,15 @@ module WeakSwaggerParameters
       end
 
       def params(&block)
-        @child_definitions << WeakSwaggerParameters::Definitions::Params.new(&block)
+        @param_definition = WeakSwaggerParameters::Definitions::Params.new(&block)
       end
 
       def response(status_code, description)
-        @child_definitions << WeakSwaggerParameters::Definitions::Response.new(status_code, description)
+        @response_definitions << WeakSwaggerParameters::Definitions::Response.new(status_code, description)
       end
 
       def apply_validations(controller_class)
-        child_definitions = @child_definitions
+        child_definitions = validation_definitions
         method = @method
 
         controller_class.instance_eval do
@@ -36,7 +37,7 @@ module WeakSwaggerParameters
       end
 
       def apply_docs(controller_class)
-        child_definitions = @child_definitions
+        child_definitions = doc_definitions
         path = @path
         method = http_method
         name = resource_name(controller_class)
@@ -56,6 +57,14 @@ module WeakSwaggerParameters
       end
 
       private
+
+        def doc_definitions
+          validation_definitions + @response_definitions
+        end
+
+        def validation_definitions
+          [@param_definition]
+        end
 
         def http_method
           known_methods = {

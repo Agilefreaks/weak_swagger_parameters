@@ -7,11 +7,13 @@ module WeakSwaggerParameters
         @description = description
       end
 
-      def apply_validations(parent_node)
-      end
-
       def apply_docs(parent_node)
-        parent_node.response @status_code, description: @description
+        status_code = @status_code
+        response_options = { description: @description }
+
+        parent_node.instance_eval do
+          response status_code, response_options
+        end
       end
     end
   end
