@@ -14,7 +14,7 @@ module WeakSwaggerParameters
       def query(&block)
         @child_definitions << WeakSwaggerParameters::Definitions::Query.new(&block)
       end
-1
+
       def path(&block)
         @child_definitions << WeakSwaggerParameters::Definitions::Path.new(&block)
       end

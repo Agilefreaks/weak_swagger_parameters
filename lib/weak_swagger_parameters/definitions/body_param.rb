@@ -23,8 +23,8 @@ module WeakSwaggerParameters
       def apply_docs(parent_node)
         name = @name
         property_options = { description: @description }
-        property_options.merge!(default: @options[:default]) if @options.key?(:default)
-        property_options.merge!(enum: @options[:enum]) if @options.key?(:enum)
+        property_options[:default] = @options[:default] if @options.key?(:default)
+        property_options[:enum] = @options[:enum] if @options.key?(:enum)
         property_options.merge!(swagger_type_options)
 
         parent_node.instance_eval { property name, property_options }
@@ -39,7 +39,7 @@ module WeakSwaggerParameters
             float: { type: :number, format: :float },
             double: { type: :number, format: :double },
             string: { type: :string },
-            byte: { type: :string, format: :byte  },
+            byte: { type: :string, format: :byte },
             binary: { type: :string, format: :binary },
             boolean: { type: :boolean },
             date: { type: :string, format: :date },

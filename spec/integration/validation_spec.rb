@@ -35,7 +35,19 @@ RSpec.describe 'Controller Action Validation', type: :controller do
   end
 
   describe 'create' do
-    let(:params) { { short_name: 'foo-bar', count: '42', subject: 'Foo', context: 'Bar', runs: 42, passed: false, required_field: 'baz', enum_field: 'a', token: 'token' } }
+    let(:params) do
+      {
+          short_name: 'foo-bar',
+          count: '42',
+          subject: 'Foo',
+          context: 'Bar',
+          runs: 42,
+          passed: false,
+          required_field: 'baz',
+          enum_field: 'a',
+          token: 'token'
+      }
+    end
 
     subject { post :create, params }
 
