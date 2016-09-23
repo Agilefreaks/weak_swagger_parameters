@@ -10,17 +10,17 @@ module WeakSwaggerParameters
 
       def string(name, description, options = {})
         @required_fields << name if options.try(:[], :required)
-        @child_definitions << WeakSwaggerParameters::Definitions::BodyParams::String.new(name, description, options)
+        @child_definitions << WeakSwaggerParameters::Definitions::BodyParam.new(:string, name, description, options)
       end
 
       def boolean(name, description, options = {})
         @required_fields << name if options.try(:[], :required)
-        @child_definitions << WeakSwaggerParameters::Definitions::BodyParams::Boolean.new(name, description, options)
+        @child_definitions << WeakSwaggerParameters::Definitions::BodyParam.new(:boolean, name, description, options)
       end
 
       def integer(name, description, options = {})
         @required_fields << name if options.try(:[], :required)
-        @child_definitions << WeakSwaggerParameters::Definitions::BodyParams::Integer.new(name, description, options)
+        @child_definitions << WeakSwaggerParameters::Definitions::BodyParam.new(:integer, name, description, options)
       end
 
       def apply_validations(parent_node)
