@@ -2,6 +2,8 @@
 module WeakSwaggerParameters
   module Definitions
     class Api
+      attr_writer :description
+
       def initialize(method, path, summary, &block)
         @method = method
         @path = path
@@ -11,10 +13,6 @@ module WeakSwaggerParameters
         @description = nil
 
         instance_eval(&block)
-      end
-
-      def description(description)
-        @description = description
       end
 
       def params(&block)
@@ -40,12 +38,7 @@ module WeakSwaggerParameters
         child_definitions = doc_definitions
         path = @path
         method = http_method
-        name = resource_name(controller_class)
-        operation_params = {}
-        operation_params[:summary] = @summary
-        operation_params[:operationId] = operation_id(method, name)
-        operation_params[:description] = @description unless @description.blank?
-        operation_params[:tags] = [name]
+        operation_params = operation_params(method, controller_class)
 
         controller_class.instance_eval do
           swagger_path path do
@@ -76,6 +69,17 @@ module WeakSwaggerParameters
         }
 
         known_methods[@method]
+      end
+
+      def operation_params(method, controller_class)
+        name = resource_name(controller_class)
+        {
+          summary: @summary,
+          operationId: operation_id(method, name),
+          tags: [name]
+        }.tap do |h|
+          h[:description] = @description unless @description.blank?
+        end
       end
 
       def resource_name(controller_class)

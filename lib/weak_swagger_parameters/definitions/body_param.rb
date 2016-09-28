@@ -14,7 +14,7 @@ module WeakSwaggerParameters
         name = @name
         validation_options = {}
         validation_options[:strong] = true
-        validation_options[:required] = !!@options[:required]
+        validation_options[:required] = @options.key?(:required)
         validation_options[:only] = @options[:enum] if @options.key?(:enum)
 
         parent_node.instance_eval { send type, name, validation_options }
@@ -32,6 +32,7 @@ module WeakSwaggerParameters
 
       private
 
+      # rubocop:disable MethodLength
       def swagger_type_options
         known_types = {
           integer: { type: :integer, format: :int32 },
