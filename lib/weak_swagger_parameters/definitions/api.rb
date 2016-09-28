@@ -2,7 +2,15 @@
 module WeakSwaggerParameters
   module Definitions
     class Api
-      attr_writer :description
+      KNOWN_METHODS = {
+        create: :post,
+        index: :get,
+        show: :get,
+        destroy: :delete,
+        update: :put
+      }.freeze
+
+      attr_reader :path
 
       def initialize(method, path, summary, &block)
         @method = method
@@ -13,6 +21,10 @@ module WeakSwaggerParameters
         @description = nil
 
         instance_eval(&block)
+      end
+
+      def description(description)
+        @description = description
       end
 
       def params(&block)
@@ -35,40 +47,30 @@ module WeakSwaggerParameters
       end
 
       def apply_docs(controller_class)
-        child_definitions = doc_definitions
-        path = @path
-        method = http_method
-        operation_params = operation_params(method, controller_class)
+        this = self
+        operation_params = operation_params(http_method, controller_class)
 
         controller_class.instance_eval do
-          swagger_path path do
-            operation method, operation_params do
-              child_definitions.each { |definition| definition.apply_docs(self) }
+          swagger_path this.path do
+            operation this.http_method, operation_params do
+              this.child_definitions.each { |definition| definition.apply_docs(self) }
             end
           end
         end
       end
 
-      private
-
-      def doc_definitions
+      def child_definitions
         validation_definitions + @response_definitions
       end
 
-      def validation_definitions
-        [@param_definition]
+      def http_method
+        KNOWN_METHODS[@method]
       end
 
-      def http_method
-        known_methods = {
-          create: :post,
-          index: :get,
-          show: :get,
-          destroy: :delete,
-          update: :put
-        }
+      private
 
-        known_methods[@method]
+      def validation_definitions
+        [@param_definition]
       end
 
       def operation_params(method, controller_class)
