@@ -39,27 +39,27 @@ module WeakSwaggerParameters
 
       private
 
-        def controllers_in_docs_section(docs_section)
-          controllers = []
-          ObjectSpace.each_object(Class) do |klass|
-            if is_controller?(klass) && is_in_docs_section?(klass, docs_section)
-              controllers << klass
-            end
+      def controllers_in_docs_section(docs_section)
+        controllers = []
+        ObjectSpace.each_object(Class) do |klass|
+          if is_controller?(klass) && is_in_docs_section?(klass, docs_section)
+            controllers << klass
           end
-          controllers
         end
+        controllers
+      end
 
-        def ensure_loaded
-          Rails.application.eager_load! if !Rails.configuration.eager_load || !Rails.configuration.cache_classes
-        end
+      def ensure_loaded
+        Rails.application.eager_load! if !Rails.configuration.eager_load || !Rails.configuration.cache_classes
+      end
 
-        def is_controller?(klass)
-          klass.ancestors.include?(AbstractController::Base)
-        end
+      def is_controller?(klass)
+        klass.ancestors.include?(AbstractController::Base)
+      end
 
-        def is_in_docs_section?(klass, docs_section)
-          klass.respond_to?(:in_doc_section?) && klass.in_doc_section?(docs_section)
-        end
+      def is_in_docs_section?(klass, docs_section)
+        klass.respond_to?(:in_doc_section?) && klass.in_doc_section?(docs_section)
+      end
     end
   end
 end

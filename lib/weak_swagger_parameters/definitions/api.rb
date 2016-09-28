@@ -41,11 +41,11 @@ module WeakSwaggerParameters
         path = @path
         method = http_method
         name = resource_name(controller_class)
-        operation_params = Hash.new
-        operation_params.merge!(summary: @summary)
-        operation_params.merge!(operationId: operation_id(method, name))
-        operation_params.merge!(description: @description) unless @description.blank?
-        operation_params.merge!(tags: [name])
+        operation_params = {}
+        operation_params[:summary] = @summary
+        operation_params[:operationId] = operation_id(method, name)
+        operation_params[:description] = @description unless @description.blank?
+        operation_params[:tags] = [name]
 
         controller_class.instance_eval do
           swagger_path path do
@@ -58,33 +58,33 @@ module WeakSwaggerParameters
 
       private
 
-        def doc_definitions
-          validation_definitions + @response_definitions
-        end
+      def doc_definitions
+        validation_definitions + @response_definitions
+      end
 
-        def validation_definitions
-          [@param_definition]
-        end
+      def validation_definitions
+        [@param_definition]
+      end
 
-        def http_method
-          known_methods = {
-              create: :post,
-              index: :get,
-              show: :get,
-              destroy: :delete,
-              update: :put
-          }
+      def http_method
+        known_methods = {
+          create: :post,
+          index: :get,
+          show: :get,
+          destroy: :delete,
+          update: :put
+        }
 
-          known_methods[@method]
-        end
+        known_methods[@method]
+      end
 
-        def resource_name(controller_class)
-          controller_class.controller_name.humanize
-        end
+      def resource_name(controller_class)
+        controller_class.controller_name.humanize
+      end
 
-        def operation_id(method, name)
-          "#{method}#{name}"
-        end
+      def operation_id(method, name)
+        "#{method}#{name}"
+      end
     end
   end
 end
