@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/Agilefreaks/weak_swagger_parameters.svg?branch=master)](https://travis-ci.org/Agilefreaks/weak_swagger_parameters)
-
+[![Code Climate](https://codeclimate.com/github/Agilefreaks/weak_swagger_parameters/badges/gpa.svg)](https://codeclimate.com/github/Agilefreaks/weak_swagger_parameters)
+[![Test Coverage](https://codeclimate.com/github/Agilefreaks/weak_swagger_parameters/badges/coverage.svg)](https://codeclimate.com/github/Agilefreaks/weak_swagger_parameters/coverage)
 
 # WeakSwaggerParameters
 
