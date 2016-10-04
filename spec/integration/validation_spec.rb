@@ -49,7 +49,9 @@ RSpec.describe 'Controller Action Validation', type: :controller do
       }
     end
 
-    subject { post :create, params }
+    subject { process :create, method: :post, params: params }
+
+    before { request.env['CONTENT_TYPE'] = 'application/json' }
 
     context 'body parameter is enum' do
       let(:param_name) { :enum_field }
@@ -140,7 +142,7 @@ RSpec.describe 'Controller Action Validation', type: :controller do
         it 'has permitted param' do
           subject
 
-          expect(controller.permitted_params[param_name]).to eq('0')
+          expect(controller.permitted_params[param_name]).to eq(0)
         end
       end
 
@@ -154,7 +156,7 @@ RSpec.describe 'Controller Action Validation', type: :controller do
         it 'has permitted param' do
           subject
 
-          expect(controller.permitted_params[param_name]).to eq('1')
+          expect(controller.permitted_params[param_name]).to eq(1)
         end
       end
 
@@ -183,13 +185,7 @@ RSpec.describe 'Controller Action Validation', type: :controller do
           params[param_name] = 42
         end
 
-        its(:status) { is_expected.to eq 201 }
-
-        it 'has permitted param' do
-          subject
-
-          expect(controller.permitted_params[param_name]).to eq('42')
-        end
+        its(:status) { is_expected.to eq 400 }
       end
 
       context 'when value is boolean' do
