@@ -4,9 +4,7 @@
 
 # WeakSwaggerParameters
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/weak_swagger_parameters`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is an integration gem between `weak_parameters` and `swagger-blocks` to allow creating interactive swagger documentation and input parameter validation without duplicating the definitions using both DSLs.
 
 ## Installation
 
@@ -18,25 +16,103 @@ gem 'weak_swagger_parameters'
 
 And then execute:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install weak_swagger_parameters
+    $ bundle install
 
 ## Usage
 
-TODO: Write usage instructions here
+(1) Add route to a docs controller to serve Swagger v2.0 json
+````ruby
+# routes.rb
+
+namespace :v1 do
+  resources :docs, only: [:index]
+end
+````
+
+(2) Create a controller for serving the Swagger v2.0 json
+````ruby
+module V1
+  class DocsController < ActionController::Base
+    include WeakSwaggerParameters::Controller
+ 
+    add_to_doc_section('V1')
+ 
+    swagger_root swagger: '2.0' do
+      info version: '1.0', title: 'The best api', description: 'Api that does everything'
+      key :host, 'example.com'
+      key :consumes, ['application/json']
+      key :produces, ['application/json']
+    end
+    def index
+      render_docs('V1')
+    end
+  end
+end
+````
+
+(3) Add metadata to existing controllers for them to show up in the documentation
+
+````ruby
+  class ItemsController < ActionController::Base
+    include WeakSwaggerParameters::Controller
+
+    add_to_doc_section('V1')
+
+    api :create, '/tests', 'Create test' do
+      params do
+        path do
+          string :short_name, 'Short test name'
+          integer :count, 'Count of tests'
+        end
+        query do
+          string :token, 'The token'
+        end
+        body do
+          string :subject, 'The unit under test'
+          string :context, 'The context of the test'
+          integer :runs, 'Run times'
+          boolean :passed, 'Passed'
+          boolean :boolean_required, 'Boolean required', required: true
+          string :string_required, 'String required', required: true
+          integer :integer_required, 'Integer required', required: true
+          string :string_enum, 'String enum', enum: %w(a b c)
+          string :string_default, 'String default', default: 'origin'
+        end
+      end
+      response 201, 'Created the test'
+      response 400, 'Bad Request'
+    end
+    def create
+      # ...
+    end
+  end
+````
+
+For complete examples, see the specs.
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Install dependencies
+  
+```
+  bundle install
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Run Specs
+  
+```
+  bundle exec rake rspec
+```
+
+Run Rubocop
+  
+```
+  bundle exec rake rubocop
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/weak_swagger_parameters. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/AgileFreaks/weak_swagger_parameters. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
