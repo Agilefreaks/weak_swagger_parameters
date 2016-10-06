@@ -15,6 +15,19 @@ RSpec.describe 'Controller Action Documentation' do
       key :produces, ['application/json']
     end
 
+    get :index, '/tests', 'List tests' do
+      params do
+        query do
+          string :term, 'Search term'
+        end
+      end
+
+      response 200, 'A list of tests'
+    end
+    def index
+      []
+    end
+
     post :create, '/tests', 'Create test' do
       params do
         path do

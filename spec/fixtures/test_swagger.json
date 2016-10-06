@@ -15,9 +15,32 @@
   ],
   "paths": {
     "/tests": {
+      "get": {
+        "summary": "List tests",
+        "operationId": "getTests",
+        "tags": [
+          "Tests"
+        ],
+        "parameters": [
+          {
+            "name": "term",
+            "type": "string",
+            "in": "query",
+            "description": "Search term"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of tests"
+          }
+        }
+      },
       "post": {
-        "operationId": "postTests",
         "summary": "Create test",
+        "operationId": "postTests",
+        "tags": [
+          "Tests"
+        ],
         "parameters": [
           {
             "name": "short_name",
@@ -50,48 +73,48 @@
               ],
               "properties": {
                 "subject": {
-                  "type": "string",
-                  "description": "The unit under test"
+                  "description": "The unit under test",
+                  "type": "string"
                 },
                 "context": {
-                  "type": "string",
-                  "description": "The context of the test"
+                  "description": "The context of the test",
+                  "type": "string"
                 },
                 "runs": {
+                  "description": "Run times",
                   "type": "integer",
-                  "format": "int32",
-                  "description": "Run times"
+                  "format": "int32"
                 },
                 "passed": {
-                  "type": "boolean",
-                  "description": "Passed"
+                  "description": "Passed",
+                  "type": "boolean"
                 },
                 "boolean_required": {
-                  "type": "boolean",
-                  "description": "Boolean required"
+                  "description": "Boolean required",
+                  "type": "boolean"
                 },
                 "string_required": {
-                  "type": "string",
-                  "description": "String required"
+                  "description": "String required",
+                  "type": "string"
                 },
                 "integer_required": {
+                  "description": "Integer required",
                   "type": "integer",
-                  "format": "int32",
-                  "description": "Integer required"
+                  "format": "int32"
                 },
                 "string_enum": {
-                  "type": "string",
                   "description": "String enum",
                   "enum": [
                     "a",
                     "b",
                     "c"
-                  ]
+                  ],
+                  "type": "string"
                 },
                 "string_default": {
-                  "type": "string",
                   "description": "String default",
-                  "default": "origin"
+                  "default": "origin",
+                  "type": "string"
                 }
               }
             }
@@ -104,10 +127,7 @@
           "400": {
             "description": "Bad Request"
           }
-        },
-        "tags": [
-          "Tests"
-        ]
+        }
       }
     }
   }
