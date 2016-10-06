@@ -56,6 +56,19 @@ RSpec.describe 'Controller Action Documentation' do
     def create
       head 201
     end
+
+    post :ignore_test, '/tests/ignore/{test_name}', 'Ignore a test' do
+      params do
+        path do
+          string :test_name, 'Test name'
+        end
+      end
+
+      response 204, 'No content.'
+    end
+    def ignore_test
+      head 204
+    end
   end
 
   describe 'swagger doc' do

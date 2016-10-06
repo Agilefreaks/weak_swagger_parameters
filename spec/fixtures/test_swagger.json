@@ -129,6 +129,28 @@
           }
         }
       }
+    },
+    "/tests/ignore/{test_name}": {
+      "post": {
+        "summary": "Ignore a test",
+        "operationId": "postTests",
+        "tags": [
+          "Tests"
+        ],
+        "parameters": [
+          {
+            "name": "test_name",
+            "type": "string",
+            "in": "path",
+            "description": "Test name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content."
+          }
+        }
+      }
     }
   }
 }
