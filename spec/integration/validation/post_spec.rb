@@ -1,51 +1,18 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe 'Controller Action Validation', type: :controller do
-  controller(ActionController::Base) do
-    include WeakSwaggerParameters::Controller
-
-    add_to_doc_section('Test')
-
-    api :create, '/tests/{short_name}/{count}', 'Create test' do
-      params do
-        path do
-          string :short_name, 'Short test name'
-          integer :count, 'Count of tests'
-        end
-        query do
-          string :token, 'The token'
-        end
-        body do
-          string :subject, 'The unit under test'
-          string :context, 'The context of the test'
-          integer :runs, 'Run times'
-          boolean :passed, 'Passed'
-          string :required_field, 'The required field', required: true
-          string :enum_field, 'The enum field', enum: %w(a b)
-        end
-      end
-
-      response 201, 'Created the test'
-      response 400, 'Bad Request'
-    end
-    def create
-      head 201
-    end
-  end
-
+RSpec.describe PostTestsController, type: :controller do
   describe 'create' do
     let(:params) do
       {
-        short_name: 'foo-bar',
-        count: '42',
-        subject: 'Foo',
-        context: 'Bar',
-        runs: 42,
-        passed: false,
-        required_field: 'baz',
-        enum_field: 'a',
-        token: 'token'
+          subject: 'Foo',
+          context: 'Bar',
+          runs: 42,
+          passed: false,
+          boolean_required: true,
+          string_required: 'baz',
+          integer_required: 12,
+          string_enum: 'a'
       }
     end
 
@@ -54,7 +21,7 @@ RSpec.describe 'Controller Action Validation', type: :controller do
     before { request.env['CONTENT_TYPE'] = 'application/json' }
 
     context 'body parameter is enum' do
-      let(:param_name) { :enum_field }
+      let(:param_name) { :string_enum }
 
       context 'when missing' do
         before :each do
@@ -82,7 +49,7 @@ RSpec.describe 'Controller Action Validation', type: :controller do
     end
 
     context 'body parameter is required' do
-      let(:param_name) { :required_field }
+      let(:param_name) { :string_required }
 
       context 'when missing' do
         before :each do

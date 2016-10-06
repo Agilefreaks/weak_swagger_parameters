@@ -1,0 +1,55 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "The test api",
+    "description": "Test api description"
+  },
+  "host": "localhost:1234",
+  "basePath": "",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tests/{id}": {
+      "put": {
+        "summary": "Updates a test",
+        "operationId": "putPutTests",
+        "tags": [
+          "Put tests"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "format": "int32",
+            "in": "path",
+            "description": "Id of the test"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": [],
+              "properties": {
+                "expectations": {
+                  "description": "Expectations",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}
