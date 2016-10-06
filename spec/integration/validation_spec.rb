@@ -7,7 +7,7 @@ RSpec.describe 'Controller Action Validation', type: :controller do
 
     add_to_doc_section('Test')
 
-    api :create, '/tests/{short_name}/{count}', 'Create test' do
+    post :create, '/tests/{short_name}/{count}', 'Create test' do
       params do
         path do
           string :short_name, 'Short test name'

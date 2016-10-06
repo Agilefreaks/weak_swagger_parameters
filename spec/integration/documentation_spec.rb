@@ -15,7 +15,7 @@ RSpec.describe 'Controller Action Documentation' do
       key :produces, ['application/json']
     end
 
-    api :create, '/tests', 'Create test' do
+    post :create, '/tests', 'Create test' do
       params do
         path do
           string :short_name, 'Short test name'

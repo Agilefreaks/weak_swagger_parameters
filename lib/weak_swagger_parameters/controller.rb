@@ -13,8 +13,8 @@ module WeakSwaggerParameters
         (@doc_sections || []).include?(doc_section)
       end
 
-      def api(method, path, description, &block)
-        api_docs = WeakSwaggerParameters::Definitions::Api.new(method, path, description, &block)
+      def post(action, path, description, &block)
+        api_docs = WeakSwaggerParameters::Definitions::Api.new(:post, action, path, description, &block)
         api_docs.apply_validations(self)
         api_docs.apply_docs(self)
       end
