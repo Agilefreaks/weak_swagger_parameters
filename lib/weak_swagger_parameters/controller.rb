@@ -21,6 +21,18 @@ module WeakSwaggerParameters
         api(:post, action, path, description, &block)
       end
 
+      def put(action, path, description, &block)
+        api(:put, action, path, description, &block)
+      end
+
+      def patch(action, path, description, &block)
+        api(:patch, action, path, description, &block)
+      end
+
+      def delete(action, path, description, &block)
+        api(:delete, action, path, description, &block)
+      end
+
       private
 
       def api(http_method, action, path, description, &block)

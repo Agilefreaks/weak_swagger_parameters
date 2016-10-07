@@ -1,0 +1,54 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "The test api",
+    "description": "Test api description"
+  },
+  "host": "localhost:1234",
+  "basePath": "",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tests": {
+      "get": {
+        "summary": "List tests",
+        "operationId": "getGetTests",
+        "tags": [
+          "Get tests"
+        ],
+        "parameters": [
+          {
+            "name": "term",
+            "type": "string",
+            "in": "query",
+            "description": "Search term"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of tests"
+          }
+        }
+      }
+    },
+    "/tests/show": {
+      "get": {
+        "summary": "Show suite",
+        "operationId": "getGetTests",
+        "tags": [
+          "Get tests"
+        ],
+        "responses": {
+          "200": {
+            "description": "No content."
+          }
+        }
+      }
+    }
+  }
+}

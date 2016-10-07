@@ -13,7 +13,7 @@ module WeakSwaggerParameters
         @response_definitions = []
         @description = nil
 
-        instance_eval(&block)
+        instance_eval(&block) if block.present?
       end
 
       def description(description)
@@ -24,7 +24,7 @@ module WeakSwaggerParameters
         @param_definition = WeakSwaggerParameters::Definitions::Params.new(&block)
       end
 
-      def response(status_code, description)
+      def response(status_code, description = '')
         @response_definitions << WeakSwaggerParameters::Definitions::Response.new(status_code, description)
       end
 
@@ -54,20 +54,20 @@ module WeakSwaggerParameters
       end
 
       def child_definitions
-        validation_definitions + @response_definitions
+        (validation_definitions + @response_definitions).compact
       end
 
       private
 
       def validation_definitions
-        [@param_definition]
+        [@param_definition].compact
       end
 
       def operation_params(method, controller_class)
         name = resource_name(controller_class)
         {
           summary: @summary,
-          operationId: operation_id(method, name),
+          operationId: operation_id(method, controller_class),
           tags: [name]
         }.tap do |h|
           h[:description] = @description unless @description.blank?
@@ -78,8 +78,8 @@ module WeakSwaggerParameters
         controller_class.controller_name.humanize
       end
 
-      def operation_id(method, name)
-        "#{method}#{name}"
+      def operation_id(method, controller_class)
+        "#{method}_#{controller_class.controller_name}".camelize(:lower)
       end
     end
   end

@@ -15,31 +15,11 @@
   ],
   "paths": {
     "/tests": {
-      "get": {
-        "summary": "List tests",
-        "operationId": "getTests",
-        "tags": [
-          "Tests"
-        ],
-        "parameters": [
-          {
-            "name": "term",
-            "type": "string",
-            "in": "query",
-            "description": "Search term"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A list of tests"
-          }
-        }
-      },
       "post": {
         "summary": "Create test",
-        "operationId": "postTests",
+        "operationId": "postPostTests",
         "tags": [
-          "Tests"
+          "Post tests"
         ],
         "parameters": [
           {
@@ -130,24 +110,32 @@
         }
       }
     },
-    "/tests/ignore/{test_name}": {
+    "/tests/custom_action": {
       "post": {
-        "summary": "Ignore a test",
-        "operationId": "postTests",
+        "summary": "Creates a custom action",
+        "operationId": "postPostTests",
         "tags": [
-          "Tests"
+          "Post tests"
         ],
         "parameters": [
           {
-            "name": "test_name",
-            "type": "string",
-            "in": "path",
-            "description": "Test name"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": [],
+              "properties": {
+                "action": {
+                  "description": "Some action",
+                  "type": "string"
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content."
+          "201": {
+            "description": ""
           }
         }
       }
