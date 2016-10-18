@@ -17,7 +17,7 @@
     "/tests": {
       "post": {
         "summary": "Create test",
-        "operationId": "postPostTests",
+        "operationId": "createPostTests",
         "tags": [
           "Post tests"
         ],
@@ -113,7 +113,7 @@
     "/tests/custom_action": {
       "post": {
         "summary": "Creates a custom action",
-        "operationId": "postPostTests",
+        "operationId": "customActionPostTests",
         "tags": [
           "Post tests"
         ],

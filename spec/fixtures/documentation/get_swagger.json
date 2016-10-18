@@ -17,7 +17,7 @@
     "/tests": {
       "get": {
         "summary": "List tests",
-        "operationId": "getGetTests",
+        "operationId": "indexGetTests",
         "tags": [
           "Get tests"
         ],
@@ -39,7 +39,7 @@
     "/tests/show": {
       "get": {
         "summary": "Show suite",
-        "operationId": "getGetTests",
+        "operationId": "showGetTests",
         "tags": [
           "Get tests"
         ],

@@ -42,7 +42,7 @@ module WeakSwaggerParameters
       def apply_docs(controller_class)
         this = self
         http_method = @http_method
-        operation_params = operation_params(http_method, controller_class)
+        operation_params = operation_params(@action, controller_class)
 
         controller_class.instance_eval do
           swagger_path this.path do
@@ -63,11 +63,11 @@ module WeakSwaggerParameters
         [@param_definition].compact
       end
 
-      def operation_params(method, controller_class)
+      def operation_params(action, controller_class)
         name = resource_name(controller_class)
         {
           summary: @summary,
-          operationId: operation_id(method, controller_class),
+          operationId: operation_id(action, controller_class),
           tags: [name]
         }.tap do |h|
           h[:description] = @description unless @description.blank?
@@ -78,8 +78,8 @@ module WeakSwaggerParameters
         controller_class.controller_name.humanize
       end
 
-      def operation_id(method, controller_class)
-        "#{method}_#{controller_class.controller_name}".camelize(:lower)
+      def operation_id(action, controller_class)
+        "#{action}_#{controller_class.controller_name}".camelize(:lower)
       end
     end
   end

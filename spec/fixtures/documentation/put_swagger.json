@@ -17,7 +17,7 @@
     "/tests/{id}": {
       "put": {
         "summary": "Updates a test",
-        "operationId": "putPutTests",
+        "operationId": "updatePutTests",
         "tags": [
           "Put tests"
         ],

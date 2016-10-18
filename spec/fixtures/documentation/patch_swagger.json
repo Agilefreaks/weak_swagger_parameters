@@ -17,7 +17,7 @@
     "/tests/{id}": {
       "patch": {
         "summary": "Updates a test",
-        "operationId": "patchPatchTests",
+        "operationId": "updatePatchTests",
         "tags": [
           "Patch tests"
         ],
@@ -54,7 +54,7 @@
     "/test/custom_action": {
       "patch": {
         "summary": "Update a custom action",
-        "operationId": "patchPatchTests",
+        "operationId": "customActionPatchTests",
         "tags": [
           "Patch tests"
         ],

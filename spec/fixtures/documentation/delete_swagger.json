@@ -17,7 +17,7 @@
     "/tests/{id}": {
       "delete": {
         "summary": "Deletes a test",
-        "operationId": "deleteDeleteTests",
+        "operationId": "destroyDeleteTests",
         "tags": [
           "Delete tests"
         ],
@@ -35,7 +35,7 @@
     "/tests/context": {
       "delete": {
         "summary": "Deletes a context",
-        "operationId": "deleteDeleteTests",
+        "operationId": "destroyContextDeleteTests",
         "tags": [
           "Delete tests"
         ],
@@ -49,7 +49,7 @@
     "/tests/shared_context": {
       "delete": {
         "summary": "Deletes a shared context",
-        "operationId": "deleteDeleteTests",
+        "operationId": "destroySharedContextDeleteTests",
         "tags": [
           "Delete tests"
         ]
