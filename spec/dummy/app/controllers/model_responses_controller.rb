@@ -13,11 +13,20 @@ class ModelResponsesController < ActionController::Base
   end
 
   get :show, '/tests/show', 'Show suite' do
-    response 200, 'No content.' do
+    response 200, 'A ModelResponse' do
       model ModelResponse
     end
   end
   def show
+    head 200
+  end
+
+  get :index, '/tests/index', 'List suites' do
+    response 200, 'An array of ModelResponse' do
+      collection ModelResponse
+    end
+  end
+  def index
     head 200
   end
 end

@@ -23,9 +23,29 @@
         ],
         "responses": {
           "200": {
-            "description": "No content.",
+            "description": "A ModelResponse",
             "schema": {
               "$ref": "#/definitions/ModelResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tests/index": {
+      "get": {
+        "summary": "List suites",
+        "operationId": "getModelResponses",
+        "tags": [
+          "Model responses"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of ModelResponse",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ModelResponse"
+              }
             }
           }
         }
