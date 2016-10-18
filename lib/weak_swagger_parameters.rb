@@ -7,7 +7,7 @@ require 'swagger/blocks'
 require 'weak_swagger_parameters/version'
 require 'weak_swagger_parameters/definitions'
 require 'weak_swagger_parameters/controller'
+require 'weak_swagger_parameters/model'
 
 module WeakSwaggerParameters
-  # Your code goes here...
 end

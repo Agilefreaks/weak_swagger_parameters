@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 module WeakSwaggerParameters
   module Definitions
-    class Body < ParamContainer
-      def initialize(&block)
+    class Model
+      def initialize(model_name, &block)
+        @model_name = model_name
         @required_fields = []
-        super
+        @child_definitions = []
+
+        instance_eval(&block) if block.present?
       end
 
       def string(name, description, options = {})
@@ -23,15 +26,14 @@ module WeakSwaggerParameters
       end
 
       def apply_docs(parent_node)
+        model_name = @model_name
         param_definitions = @child_definitions
         required_fields = @required_fields
 
         parent_node.instance_eval do
-          parameter name: :body, in: :body, required: true do
-            schema required: required_fields do
-              schema_node = self
-              param_definitions.each { |definition| definition.apply_docs(schema_node) }
-            end
+          swagger_schema model_name, required: required_fields do
+            schema_node = self
+            param_definitions.each { |definition| definition.apply_docs(schema_node) }
           end
         end
       end

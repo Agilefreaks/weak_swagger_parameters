@@ -1,0 +1,55 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "The test api",
+    "description": "Test api description"
+  },
+  "host": "localhost:1234",
+  "basePath": "",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tests/show": {
+      "get": {
+        "summary": "Show suite",
+        "operationId": "getModelResponses",
+        "tags": [
+          "Model responses"
+        ],
+        "responses": {
+          "200": {
+            "description": "No content.",
+            "schema": {
+              "$ref": "#/definitions/ModelResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ModelResponse": {
+      "required": [],
+      "properties": {
+        "foo": {
+          "description": "The foo of the model",
+          "type": "string"
+        },
+        "bar": {
+          "description": "The bar of the model",
+          "type": "integer",
+          "format": "int32"
+        },
+        "baz": {
+          "description": "The baz of the model",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

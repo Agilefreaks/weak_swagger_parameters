@@ -24,8 +24,8 @@ module WeakSwaggerParameters
         @param_definition = WeakSwaggerParameters::Definitions::Params.new(&block)
       end
 
-      def response(status_code, description = '')
-        @response_definitions << WeakSwaggerParameters::Definitions::Response.new(status_code, description)
+      def response(status_code, description = '', &block)
+        @response_definitions << WeakSwaggerParameters::Definitions::Response.new(status_code, description, &block)
       end
 
       def apply_validations(controller_class)

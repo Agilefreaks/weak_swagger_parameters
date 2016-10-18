@@ -1,9 +1,11 @@
 # frozen_string_literal: true
-require 'weak_swagger_parameters/definitions/body_param'
 require 'weak_swagger_parameters/definitions/path_params/integer'
 require 'weak_swagger_parameters/definitions/path_params/string'
 require 'weak_swagger_parameters/definitions/query_params/string'
 require 'weak_swagger_parameters/definitions/param_container'
+require 'weak_swagger_parameters/definitions/property'
+require 'weak_swagger_parameters/definitions/model_ref'
+require 'weak_swagger_parameters/definitions/model'
 require 'weak_swagger_parameters/definitions/body'
 require 'weak_swagger_parameters/definitions/path'
 require 'weak_swagger_parameters/definitions/query'
