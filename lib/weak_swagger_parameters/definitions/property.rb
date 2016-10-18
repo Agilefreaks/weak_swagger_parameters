@@ -9,6 +9,17 @@ module WeakSwaggerParameters
         @options = options || {}
       end
 
+      def apply_validations(parent_node)
+        type = @type
+        name = @name
+        validation_options = {}
+        validation_options[:strong] = true
+        validation_options[:required] = @options.key?(:required)
+        validation_options[:only] = @options[:enum] if @options.key?(:enum)
+
+        parent_node.instance_eval { send type, name, validation_options }
+      end
+
       def apply_docs(parent_node)
         name = @name
         property_options = { description: @description }
