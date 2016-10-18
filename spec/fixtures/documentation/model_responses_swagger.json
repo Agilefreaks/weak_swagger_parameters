@@ -1,0 +1,133 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "The test api",
+    "description": "Test api description"
+  },
+  "host": "localhost:1234",
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tests/show": {
+      "get": {
+        "summary": "Show suite",
+        "operationId": "showModelResponses",
+        "tags": [
+          "Model responses"
+        ],
+        "responses": {
+          "200": {
+            "description": "A ModelResponse",
+            "schema": {
+              "$ref": "#/definitions/ModelResponse"
+            }
+          }
+        }
+      }
+    },
+    "/tests/index": {
+      "get": {
+        "summary": "List suites",
+        "operationId": "indexModelResponses",
+        "tags": [
+          "Model responses"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of ModelResponse",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ModelResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/{id}": {
+      "patch": {
+        "summary": "Patch test",
+        "operationId": "updateModelResponses",
+        "tags": [
+          "Model responses"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Test id",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The wrapping ModelResponse",
+            "schema": {
+              "properties": {
+                "model_response": {
+                  "description": "The wrapped ModelResponse",
+                  "type": "object",
+                  "$ref": "#/definitions/ModelResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ModelResponse": {
+      "properties": {
+        "container": {
+          "description": "The container",
+          "type": "object",
+          "properties": {
+            "foo": {
+              "description": "The foo of the model",
+              "type": "string"
+            },
+            "bar": {
+              "description": "The bar of the model",
+              "type": "integer",
+              "format": "int32"
+            },
+            "baz": {
+              "description": "The baz of the model",
+              "type": "boolean"
+            },
+            "child": {
+              "description": "The Child",
+              "type": "object",
+              "$ref": "#/definitions/ModelChildResponse"
+            },
+            "children": {
+              "description": "The Children",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ModelChildResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ModelChildResponse": {
+      "properties": {
+        "x": {
+          "description": "The X",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

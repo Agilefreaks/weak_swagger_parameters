@@ -24,8 +24,8 @@ module WeakSwaggerParameters
         @param_definition = WeakSwaggerParameters::Definitions::Params.new(&block)
       end
 
-      def response(status_code, description = '')
-        @response_definitions << WeakSwaggerParameters::Definitions::Response.new(status_code, description)
+      def response(status_code, description = '', &block)
+        @response_definitions << WeakSwaggerParameters::Definitions::Response.new(status_code, description, &block)
       end
 
       def apply_validations(controller_class)
@@ -42,7 +42,7 @@ module WeakSwaggerParameters
       def apply_docs(controller_class)
         this = self
         http_method = @http_method
-        operation_params = operation_params(http_method, controller_class)
+        operation_params = operation_params(@action, controller_class)
 
         controller_class.instance_eval do
           swagger_path this.path do
@@ -54,7 +54,15 @@ module WeakSwaggerParameters
       end
 
       def child_definitions
-        (validation_definitions + @response_definitions).compact
+        result = validation_definitions
+
+        if @response_definitions.empty?
+          result << WeakSwaggerParameters::Definitions::Response.new(200, 'Success')
+        else
+          result += @response_definitions
+        end
+
+        result
       end
 
       private
@@ -63,11 +71,11 @@ module WeakSwaggerParameters
         [@param_definition].compact
       end
 
-      def operation_params(method, controller_class)
+      def operation_params(action, controller_class)
         name = resource_name(controller_class)
         {
           summary: @summary,
-          operationId: operation_id(method, controller_class),
+          operationId: operation_id(action, controller_class),
           tags: [name]
         }.tap do |h|
           h[:description] = @description unless @description.blank?
@@ -78,8 +86,8 @@ module WeakSwaggerParameters
         controller_class.controller_name.humanize
       end
 
-      def operation_id(method, controller_class)
-        "#{method}_#{controller_class.controller_name}".camelize(:lower)
+      def operation_id(action, controller_class)
+        "#{action}_#{controller_class.controller_name}".camelize(:lower)
       end
     end
   end

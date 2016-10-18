@@ -50,9 +50,7 @@ module WeakSwaggerParameters
 
       def render_docs(docs_section)
         ensure_loaded
-        controllers = controllers_in_docs_section(docs_section)
-
-        render json: Swagger::Blocks.build_root_json(controllers)
+        render json: Swagger::Blocks.build_root_json(doc_components_for(docs_section))
       end
 
       def handle_param_validation_error(e)
@@ -61,26 +59,20 @@ module WeakSwaggerParameters
 
       private
 
-      def controllers_in_docs_section(docs_section)
-        controllers = []
+      def doc_components_for(docs_section)
+        doc_components = []
         ObjectSpace.each_object(Class) do |klass|
-          if controller?(klass) && in_docs_section?(klass, docs_section)
-            controllers << klass
-          end
+          doc_components << klass if in_docs_section?(klass, docs_section)
         end
-        controllers
+        doc_components
       end
 
       def ensure_loaded
         Rails.application.eager_load! if !Rails.configuration.eager_load || !Rails.configuration.cache_classes
       end
 
-      def controller?(klass)
-        klass.ancestors.include?(AbstractController::Base)
-      end
-
       def in_docs_section?(klass, docs_section)
-        klass.respond_to?(:in_doc_section?) && klass.in_doc_section?(docs_section)
+        klass.methods.include?(:in_doc_section?) && klass.respond_to?(:in_doc_section?) && klass.in_doc_section?(docs_section)
       end
     end
   end

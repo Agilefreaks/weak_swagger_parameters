@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module WeakSwaggerParameters
   module Definitions
-    class BodyParam
+    class Property
       def initialize(type, name, description, options = {})
         @type = type
         @name = name

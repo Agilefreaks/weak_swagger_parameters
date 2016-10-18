@@ -6,7 +6,7 @@
     "description": "Test api description"
   },
   "host": "localhost:1234",
-  "basePath": "",
+  "basePath": "/",
   "consumes": [
     "application/json"
   ],
@@ -17,24 +17,24 @@
     "/tests/{id}": {
       "patch": {
         "summary": "Updates a test",
-        "operationId": "patchPatchTests",
+        "operationId": "updatePatchTests",
         "tags": [
           "Patch tests"
         ],
         "parameters": [
           {
             "name": "id",
-            "type": "integer",
-            "format": "int32",
             "in": "path",
-            "description": "Id of the test"
+            "required": true,
+            "description": "Id of the test",
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "required": [],
               "properties": {
                 "expectations": {
                   "description": "Expectations",
@@ -54,7 +54,7 @@
     "/test/custom_action": {
       "patch": {
         "summary": "Update a custom action",
-        "operationId": "patchPatchTests",
+        "operationId": "customActionPatchTests",
         "tags": [
           "Patch tests"
         ],
@@ -64,7 +64,6 @@
             "in": "body",
             "required": true,
             "schema": {
-              "required": [],
               "properties": {
                 "expectations": {
                   "description": "Expectations",

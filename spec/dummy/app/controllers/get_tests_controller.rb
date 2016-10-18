@@ -7,7 +7,7 @@ class GetTestsController < ActionController::Base
   swagger_root swagger: '2.0' do
     info version: '1.0', title: 'The test api', description: 'Test api description'
     key :host, 'localhost:1234'
-    key :basePath, ''
+    key :basePath, '/'
     key :consumes, ['application/json']
     key :produces, ['application/json']
   end

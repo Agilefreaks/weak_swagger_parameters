@@ -6,7 +6,7 @@
     "description": "Test api description"
   },
   "host": "localhost:1234",
-  "basePath": "",
+  "basePath": "/",
   "consumes": [
     "application/json"
   ],
@@ -17,25 +17,31 @@
     "/tests/{id}": {
       "delete": {
         "summary": "Deletes a test",
-        "operationId": "deleteDeleteTests",
+        "operationId": "destroyDeleteTests",
         "tags": [
           "Delete tests"
         ],
         "parameters": [
           {
             "name": "id",
-            "type": "integer",
-            "format": "int32",
             "in": "path",
-            "description": "Id of the test"
+            "required": true,
+            "description": "Id of the test",
+            "type": "integer",
+            "format": "int32"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
       }
     },
     "/tests/context": {
       "delete": {
         "summary": "Deletes a context",
-        "operationId": "deleteDeleteTests",
+        "operationId": "destroyContextDeleteTests",
         "tags": [
           "Delete tests"
         ],
@@ -49,10 +55,15 @@
     "/tests/shared_context": {
       "delete": {
         "summary": "Deletes a shared context",
-        "operationId": "deleteDeleteTests",
+        "operationId": "destroySharedContextDeleteTests",
         "tags": [
           "Delete tests"
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
       }
     }
   }

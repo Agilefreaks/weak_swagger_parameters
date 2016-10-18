@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe 'Controller POST Documentation' do
+RSpec.describe 'Model Response Documentation' do
   describe 'swagger doc' do
-    subject { Swagger::Blocks.build_root_json([PostTestsController]) }
+    subject { Swagger::Blocks.build_root_json([ModelResponsesController, ModelResponse, ModelChildResponse]) }
 
-    its(:as_json) { is_expected.to eq(JSON.parse(File.read('./spec/fixtures/documentation/post_swagger.json'))) }
+    its(:as_json) { is_expected.to eq(JSON.parse(File.read('./spec/fixtures/documentation/model_responses_swagger.json'))) }
 
     it 'generates valid schema' do
       schema_path = './spec/fixtures/swagger_2_0_schema.json'
