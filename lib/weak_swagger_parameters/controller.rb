@@ -74,7 +74,7 @@ module WeakSwaggerParameters
       end
 
       def in_docs_section?(klass, docs_section)
-        klass.respond_to?(:in_doc_section?) && klass.in_doc_section?(docs_section)
+        klass.methods.include?(:in_doc_section?) && klass.respond_to?(:in_doc_section?) && klass.in_doc_section?(docs_section)
       end
     end
   end
