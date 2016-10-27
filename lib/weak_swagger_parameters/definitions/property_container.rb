@@ -6,33 +6,34 @@ module WeakSwaggerParameters
 
       included do
         def string(name, description, options = {})
-          @required_fields << name if options.try(:[], :required)
-          @child_definitions << WeakSwaggerParameters::Definitions::Property.new(:string, name, description, options)
+          register_definition name, options, WeakSwaggerParameters::Definitions::Property.new(:string, name, description, options)
         end
 
         def boolean(name, description, options = {})
-          @required_fields << name if options.try(:[], :required)
-          @child_definitions << WeakSwaggerParameters::Definitions::Property.new(:boolean, name, description, options)
+          register_definition name, options, WeakSwaggerParameters::Definitions::Property.new(:boolean, name, description, options)
         end
 
         def integer(name, description, options = {})
-          @required_fields << name if options.try(:[], :required)
-          @child_definitions << WeakSwaggerParameters::Definitions::Property.new(:integer, name, description, options)
+          register_definition name, options, WeakSwaggerParameters::Definitions::Property.new(:integer, name, description, options)
         end
 
         def hash(name, description, options = {}, &block)
-          @required_fields << name if options.try(:[], :required)
-          @child_definitions << WeakSwaggerParameters::Definitions::HashProperty.new(name, description, &block)
+          register_definition name, options, WeakSwaggerParameters::Definitions::HashProperty.new(name, description, &block)
         end
 
         def model(name, description, model_class, options = {})
-          @required_fields << name if options.try(:[], :required)
-          @child_definitions << WeakSwaggerParameters::Definitions::ModelProperty.new(name, description, model_class)
+          register_definition name, options, WeakSwaggerParameters::Definitions::ModelProperty.new(name, description, model_class)
         end
 
         def collection(name, description, model_class, options = {})
+          register_definition name, options, WeakSwaggerParameters::Definitions::CollectionProperty.new(name, description, model_class)
+        end
+
+        private
+
+        def register_definition(name, options, definition)
           @required_fields << name if options.try(:[], :required)
-          @child_definitions << WeakSwaggerParameters::Definitions::CollectionProperty.new(name, description, model_class)
+          @child_definitions << definition
         end
       end
     end
