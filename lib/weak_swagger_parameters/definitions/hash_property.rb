@@ -1,54 +1,48 @@
 # frozen_string_literal: true
 module WeakSwaggerParameters
   module Definitions
-    class Model
-      def initialize(model_name, &block)
-        @model_name = model_name
-        @required_fields = []
+    class HashProperty
+      def initialize(name, description, &block)
+        @name = name
+        @description = description
         @child_definitions = []
 
         instance_eval(&block) if block.present?
       end
 
       def string(name, description, options = {})
-        @required_fields << name if options.try(:[], :required)
         @child_definitions << WeakSwaggerParameters::Definitions::Property.new(:string, name, description, options)
       end
 
       def boolean(name, description, options = {})
-        @required_fields << name if options.try(:[], :required)
         @child_definitions << WeakSwaggerParameters::Definitions::Property.new(:boolean, name, description, options)
       end
 
       def integer(name, description, options = {})
-        @required_fields << name if options.try(:[], :required)
         @child_definitions << WeakSwaggerParameters::Definitions::Property.new(:integer, name, description, options)
       end
 
-      def hash(name, description, options = {}, &block)
-        @required_fields << name if options.try(:[], :required)
+      def hash(name, description, &block)
         @child_definitions << WeakSwaggerParameters::Definitions::HashProperty.new(name, description, &block)
       end
 
-      def model(name, description, model_class, options = {})
-        @required_fields << name if options.try(:[], :required)
+      def model(name, description, model_class)
         @child_definitions << WeakSwaggerParameters::Definitions::ModelProperty.new(name, description, model_class)
       end
 
-      def collection(name, description, model_class, options = {})
-        @required_fields << name if options.try(:[], :required)
+      def collection(name, description, model_class)
         @child_definitions << WeakSwaggerParameters::Definitions::CollectionProperty.new(name, description, model_class)
       end
 
       def apply_docs(parent_node)
-        model_name = @model_name
-        param_definitions = @child_definitions
-        required_fields = @required_fields
+        name = @name
+        description = @description
+        child_definitions = @child_definitions
 
         parent_node.instance_eval do
-          swagger_schema model_name, required: required_fields do
-            schema_node = self
-            param_definitions.each { |definition| definition.apply_docs(schema_node) }
+          property name, description: description, type: :object do
+            hash_node = self
+            child_definitions.each { |definition| definition.apply_docs(hash_node) }
           end
         end
       end

@@ -56,18 +56,45 @@
     "ModelResponse": {
       "required": [],
       "properties": {
-        "foo": {
-          "description": "The foo of the model",
+        "container": {
+          "description": "The container",
+          "type": "object",
+          "properties": {
+            "foo": {
+              "description": "The foo of the model",
+              "type": "string"
+            },
+            "bar": {
+              "description": "The bar of the model",
+              "type": "integer",
+              "format": "int32"
+            },
+            "baz": {
+              "description": "The baz of the model",
+              "type": "boolean"
+            },
+            "child": {
+              "description": "The Child",
+              "type": "object",
+              "$ref": "#/definitions/ModelChildResponse"
+            },
+            "children": {
+              "description": "The Children",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ModelChildResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ModelChildResponse": {
+      "required": [],
+      "properties": {
+        "x": {
+          "description": "The X",
           "type": "string"
-        },
-        "bar": {
-          "description": "The bar of the model",
-          "type": "integer",
-          "format": "int32"
-        },
-        "baz": {
-          "description": "The baz of the model",
-          "type": "boolean"
         }
       }
     }
