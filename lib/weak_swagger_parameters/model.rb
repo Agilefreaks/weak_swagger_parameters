@@ -14,7 +14,7 @@ module WeakSwaggerParameters
       end
 
       def model(&block)
-        api_docs = WeakSwaggerParameters::Definitions::Model.new(self.docs_model_name, &block)
+        api_docs = WeakSwaggerParameters::Definitions::Model.new(docs_model_name, &block)
         api_docs.apply_docs(self)
       end
 

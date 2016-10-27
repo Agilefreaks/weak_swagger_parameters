@@ -62,9 +62,7 @@ module WeakSwaggerParameters
       def doc_components_for(docs_section)
         doc_components = []
         ObjectSpace.each_object(Class) do |klass|
-          if in_docs_section?(klass, docs_section)
-            doc_components << klass
-          end
+          doc_components << klass if in_docs_section?(klass, docs_section)
         end
         doc_components
       end

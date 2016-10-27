@@ -5,14 +5,14 @@ RSpec.describe PostTestsController, type: :controller do
   describe 'create' do
     let(:params) do
       {
-          subject: 'Foo',
-          context: 'Bar',
-          runs: 42,
-          passed: false,
-          boolean_required: true,
-          string_required: 'baz',
-          integer_required: 12,
-          string_enum: 'a'
+        subject: 'Foo',
+        context: 'Bar',
+        runs: 42,
+        passed: false,
+        boolean_required: true,
+        string_required: 'baz',
+        integer_required: 12,
+        string_enum: 'a'
       }
     end
 

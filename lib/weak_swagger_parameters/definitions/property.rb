@@ -35,17 +35,17 @@ module WeakSwaggerParameters
       # rubocop:disable MethodLength
       def swagger_type_options
         known_types = {
-            integer: { type: :integer, format: :int32 },
-            long: { type: :integer, format: :int64 },
-            float: { type: :number, format: :float },
-            double: { type: :number, format: :double },
-            string: { type: :string },
-            byte: { type: :string, format: :byte },
-            binary: { type: :string, format: :binary },
-            boolean: { type: :boolean },
-            date: { type: :string, format: :date },
-            dateTime: { type: :string, format: :'date-time' },
-            password: { type: :string, format: :password }
+          integer: { type: :integer, format: :int32 },
+          long: { type: :integer, format: :int64 },
+          float: { type: :number, format: :float },
+          double: { type: :number, format: :double },
+          string: { type: :string },
+          byte: { type: :string, format: :byte },
+          binary: { type: :string, format: :binary },
+          boolean: { type: :boolean },
+          date: { type: :string, format: :date },
+          dateTime: { type: :string, format: :'date-time' },
+          password: { type: :string, format: :password }
         }
 
         known_types[@type]
