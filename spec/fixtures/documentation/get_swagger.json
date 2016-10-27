@@ -6,7 +6,7 @@
     "description": "Test api description"
   },
   "host": "localhost:1234",
-  "basePath": "",
+  "basePath": "/",
   "consumes": [
     "application/json"
   ],

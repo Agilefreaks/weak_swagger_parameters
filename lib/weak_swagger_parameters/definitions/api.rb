@@ -54,7 +54,15 @@ module WeakSwaggerParameters
       end
 
       def child_definitions
-        (validation_definitions + @response_definitions).compact
+        result = validation_definitions
+
+        if @response_definitions.empty?
+          result << WeakSwaggerParameters::Definitions::Response.new(200, 'Success')
+        else
+          result += @response_definitions
+        end
+
+        result
       end
 
       private

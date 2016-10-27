@@ -6,6 +6,7 @@ require File.expand_path('../../spec/dummy/config/environment', __FILE__)
 require 'rspec/rails'
 require 'rspec/its'
 require 'weak_swagger_parameters'
+require 'json-schema'
 
 RSpec.configure do |config|
   # If true, the base class of anonymous controllers will be inferred

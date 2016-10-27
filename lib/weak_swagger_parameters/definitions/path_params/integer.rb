@@ -21,7 +21,7 @@ module WeakSwaggerParameters
           description = @description
 
           parent_node.instance_eval do
-            parameter name: name, type: :integer, format: :int32, in: :path, description: description
+            parameter name: name, in: :path, required: true, description: description, type: :integer, format: :int32
           end
         end
       end

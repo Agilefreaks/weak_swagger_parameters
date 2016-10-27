@@ -6,7 +6,7 @@
     "description": "Test api description"
   },
   "host": "localhost:1234",
-  "basePath": "",
+  "basePath": "/",
   "consumes": [
     "application/json"
   ],
@@ -24,16 +24,18 @@
         "parameters": [
           {
             "name": "short_name",
-            "type": "string",
             "in": "path",
-            "description": "Short test name"
+            "required": true,
+            "description": "Short test name",
+            "type": "string"
           },
           {
             "name": "count",
-            "type": "integer",
-            "format": "int32",
             "in": "path",
-            "description": "Count of tests"
+            "required": true,
+            "description": "Count of tests",
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "token",
@@ -123,7 +125,6 @@
             "in": "body",
             "required": true,
             "schema": {
-              "required": [],
               "properties": {
                 "action": {
                   "description": "Some action",

@@ -24,13 +24,13 @@ module WeakSwaggerParameters
 
       def apply_docs(parent_node)
         param_definitions = @child_definitions
-        required_fields = @required_fields
+        schema_options = {}
+        schema_options[:required] = @required_fields unless @required_fields.empty?
 
         parent_node.instance_eval do
           parameter name: :body, in: :body, required: true do
-            schema required: required_fields do
-              schema_node = self
-              param_definitions.each { |definition| definition.apply_docs(schema_node) }
+            schema schema_options do
+              param_definitions.each { |definition| definition.apply_docs(self) }
             end
           end
         end

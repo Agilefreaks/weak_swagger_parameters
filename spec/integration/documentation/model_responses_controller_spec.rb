@@ -6,5 +6,13 @@ RSpec.describe 'Model Response Documentation' do
     subject { Swagger::Blocks.build_root_json([ModelResponsesController, ModelResponse, ModelChildResponse]) }
 
     its(:as_json) { is_expected.to eq(JSON.parse(File.read('./spec/fixtures/documentation/model_responses_swagger.json'))) }
+
+    it 'generates valid schema' do
+      schema_path = './spec/fixtures/swagger_2_0_schema.json'
+
+      swagger_json = subject.to_json
+
+      expect(JSON::Validator.fully_validate(schema_path, swagger_json)).to be_empty
+    end
   end
 end

@@ -21,5 +21,13 @@ RSpec.describe DocsController, type: :controller do
     before { request.env['CONTENT_TYPE'] = 'application/json' }
 
     its(:status) { is_expected.to eq 200 }
+
+    it 'generates valid schema' do
+      schema_path = './spec/fixtures/swagger_2_0_schema.json'
+
+      swagger_json = subject.body
+
+      expect(JSON::Validator.fully_validate(schema_path, swagger_json)).to be_empty
+    end
   end
 end

@@ -6,7 +6,7 @@
     "description": "Test api description"
   },
   "host": "localhost:1234",
-  "basePath": "",
+  "basePath": "/",
   "consumes": [
     "application/json"
   ],
@@ -54,7 +54,6 @@
   },
   "definitions": {
     "ModelResponse": {
-      "required": [],
       "properties": {
         "container": {
           "description": "The container",
@@ -90,7 +89,6 @@
       }
     },
     "ModelChildResponse": {
-      "required": [],
       "properties": {
         "x": {
           "description": "The X",
