@@ -50,6 +50,39 @@
           }
         }
       }
+    },
+    "/tests/{id}": {
+      "patch": {
+        "summary": "Patch test",
+        "operationId": "updateModelResponses",
+        "tags": [
+          "Model responses"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Test id",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The wrapping ModelResponse",
+            "schema": {
+              "properties": {
+                "model_response": {
+                  "description": "The wrapped ModelResponse",
+                  "type": "object",
+                  "$ref": "#/definitions/ModelResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {

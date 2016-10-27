@@ -10,6 +10,10 @@ module WeakSwaggerParameters
         instance_eval(&block) if block.present?
       end
 
+      def hash(&block)
+        @content_schema = WeakSwaggerParameters::Definitions::HashRef.new(&block)
+      end
+
       def model(model_class)
         @content_schema = WeakSwaggerParameters::Definitions::ModelRef.new(model_class)
       end

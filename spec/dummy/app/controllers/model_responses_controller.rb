@@ -29,4 +29,20 @@ class ModelResponsesController < ActionController::Base
   def index
     head 200
   end
+
+  patch :update, '/tests/{id}', 'Patch test' do
+    params do
+      path do
+        integer :id, 'Test id'
+      end
+    end
+    response 200, 'The wrapping ModelResponse' do
+      hash do
+        model :model_response, 'The wrapped ModelResponse', ModelResponse
+      end
+    end
+  end
+  def update
+    head 204
+  end
 end
