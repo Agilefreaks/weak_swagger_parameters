@@ -32,8 +32,16 @@ module WeakSwaggerParameters
         private
 
         def register_definition(name, options, definition)
-          @required_fields << name if options.try(:[], :required)
-          @child_definitions << definition
+          required_fields << name if options.try(:[], :required)
+          child_definitions << definition
+        end
+
+        def required_fields
+          @required_fields ||= []
+        end
+
+        def child_definitions
+          @child_definitions ||= []
         end
       end
     end
