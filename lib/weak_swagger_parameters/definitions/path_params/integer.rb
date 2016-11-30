@@ -15,7 +15,7 @@ module WeakSwaggerParameters
         def apply_validations(parent_node)
           name = @name
           validation_options = { strong: true }
-          validation_options = validation_options.merge(range_options)
+          validation_options = validation_options.merge(range_validation_options)
 
           parent_node.instance_eval do
             integer name, validation_options
@@ -33,6 +33,7 @@ module WeakSwaggerParameters
               type: :integer,
               format: :int32
           }
+          docs_options = docs_options.merge(range_docs_options)
 
           parent_node.instance_eval do
             parameter docs_options
@@ -40,7 +41,7 @@ module WeakSwaggerParameters
         end
 
         private
-          def range_options
+          def range_validation_options
             max = @options[:max]
             min = @options[:min]
             result = {}
@@ -53,6 +54,21 @@ module WeakSwaggerParameters
 
             if min.present? && max.present?
               result[:only] = min...max
+            end
+
+            result
+          end
+
+          def range_docs_options
+            max = @options[:max]
+            min = @options[:min]
+            result = {}
+
+            if min.present?
+              result[:minimum] = min
+            end
+            if max.present?
+              result[:maximum] = max
             end
 
             result

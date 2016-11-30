@@ -35,7 +35,9 @@
             "required": true,
             "description": "Count of tests",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100
           },
           {
             "name": "token",
