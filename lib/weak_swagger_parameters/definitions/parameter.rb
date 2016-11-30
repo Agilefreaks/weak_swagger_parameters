@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 module WeakSwaggerParameters
   module Definitions
-    class Property
-      def initialize(type, name, description, options = {})
-        @options = (options || {}).merge(name: name, type: type, description: description)
+    class Parameter
+      def initialize(location, type, name, description, options = nil)
+        @options = (options || {}).merge(location: location, type: type, name: name, description:description)
       end
 
       def apply_validations(parent_node)
@@ -15,10 +15,9 @@ module WeakSwaggerParameters
       end
 
       def apply_docs(parent_node)
-        name = @options[:name]
-        property_options = WeakSwaggerParameters::Services::SwaggerOptionsAdapter.adapt(@options.except(:name, :required))
+        parameter_options = WeakSwaggerParameters::Services::SwaggerOptionsAdapter.adapt(@options)
 
-        parent_node.instance_eval { property name, property_options }
+        parent_node.instance_eval { parameter parameter_options }
       end
     end
   end

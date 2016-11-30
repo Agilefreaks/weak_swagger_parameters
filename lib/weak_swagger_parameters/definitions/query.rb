@@ -2,8 +2,8 @@
 module WeakSwaggerParameters
   module Definitions
     class Query < ParamContainer
-      def string(name, description)
-        @child_definitions << WeakSwaggerParameters::Definitions::QueryParams::String.new(name, description)
+      def string(name, description, options = nil)
+        @child_definitions << WeakSwaggerParameters::Definitions::Parameter.new(:query, :string, name, description, options)
       end
     end
   end

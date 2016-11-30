@@ -2,12 +2,18 @@
 module WeakSwaggerParameters
   module Definitions
     class Path < ParamContainer
-      def string(name, description)
-        @child_definitions << WeakSwaggerParameters::Definitions::PathParams::String.new(name, description)
+      def string(name, description, options = nil)
+        register_definition(:string, name, description, options)
       end
 
       def integer(name, description, options = nil)
-        @child_definitions << WeakSwaggerParameters::Definitions::PathParams::Integer.new(name, description, options)
+        register_definition(:integer, name, description, options)
+      end
+
+      private
+
+      def register_definition(type, name, description, options)
+        @child_definitions << WeakSwaggerParameters::Definitions::Parameter.new(:path, type, name, description, options)
       end
     end
   end
