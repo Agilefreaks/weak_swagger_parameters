@@ -17,9 +17,11 @@ class PostTestsController < ActionController::Base
       path do
         string :short_name, 'Short test name'
         integer :count, 'Count of tests', min: 1, max: 100
+        string :path_enum, 'Path enum', enum: %w(a b c)
       end
       query do
         string :token, 'The token'
+        string :type, 'The type', enum: %w(a b c)
       end
       body do
         string :subject, 'The unit under test'

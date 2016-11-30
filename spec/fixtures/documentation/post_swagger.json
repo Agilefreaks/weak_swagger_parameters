@@ -40,9 +40,32 @@
             "maximum": 100
           },
           {
+            "name": "path_enum",
+            "in": "path",
+            "required": true,
+            "description": "Path enum",
+            "enum": [
+              "a",
+              "b",
+              "c"
+            ],
+            "type": "string"
+          },
+          {
             "name": "token",
             "in": "query",
             "description": "The token",
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The type",
+            "enum": [
+              "a",
+              "b",
+              "c"
+            ],
             "type": "string"
           },
           {

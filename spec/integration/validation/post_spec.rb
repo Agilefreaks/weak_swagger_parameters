@@ -316,5 +316,45 @@ RSpec.describe PostTestsController, type: :controller do
         its(:status) { is_expected.to eq 400 }
       end
     end
+
+    context 'query parameter has enum' do
+      let(:param_name) { :type }
+
+      context 'value is in enum' do
+        before :each do
+          params[param_name] = 'a'
+        end
+
+        its(:status) { is_expected.to eq 201 }
+      end
+
+      context 'value is not in enum' do
+        before :each do
+          params[param_name] = 'z'
+        end
+
+        its(:status) { is_expected.to eq 400 }
+      end
+    end
+
+    context 'path parameter has enum' do
+      let(:param_name) { :path_enum }
+
+      context 'value is in enum' do
+        before :each do
+          params[param_name] = 'a'
+        end
+
+        its(:status) { is_expected.to eq 201 }
+      end
+
+      context 'value is not in enum' do
+        before :each do
+          params[param_name] = 'z'
+        end
+
+        its(:status) { is_expected.to eq 400 }
+      end
+    end
   end
 end
