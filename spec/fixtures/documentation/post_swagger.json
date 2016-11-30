@@ -24,24 +24,49 @@
         "parameters": [
           {
             "name": "short_name",
-            "in": "path",
-            "required": true,
             "description": "Short test name",
-            "type": "string"
+            "in": "path",
+            "type": "string",
+            "required": true
           },
           {
             "name": "count",
-            "in": "path",
-            "required": true,
             "description": "Count of tests",
+            "in": "path",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "required": true,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "path_enum",
+            "description": "Path enum",
+            "in": "path",
+            "enum": [
+              "a",
+              "b",
+              "c"
+            ],
+            "type": "string",
+            "required": true
           },
           {
             "name": "token",
-            "type": "string",
+            "description": "The token",
             "in": "query",
-            "description": "The token"
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "description": "The type",
+            "in": "query",
+            "enum": [
+              "a",
+              "b",
+              "c"
+            ],
+            "type": "string"
           },
           {
             "name": "body",
@@ -66,6 +91,13 @@
                   "description": "Run times",
                   "type": "integer",
                   "format": "int32"
+                },
+                "position": {
+                  "description": "Start Position",
+                  "type": "integer",
+                  "format": "int32",
+                  "minimum": 1,
+                  "maximum": 100
                 },
                 "passed": {
                   "description": "Passed",
@@ -97,6 +129,33 @@
                   "description": "String default",
                   "default": "origin",
                   "type": "string"
+                },
+                "min_missing": {
+                  "description": "Min missing",
+                  "type": "integer",
+                  "format": "int32",
+                  "maximum": 100
+                },
+                "max_missing": {
+                  "description": "Max missing",
+                  "type": "integer",
+                  "format": "int32",
+                  "minimum": 1
+                },
+                "nested_model": {
+                  "description": "My nested model",
+                  "type": "object",
+                  "$ref": "#/definitions/ModelChildResponse"
+                },
+                "my_hash": {
+                  "description": "my hash",
+                  "type": "object",
+                  "properties": {
+                    "nested_string": {
+                      "description": "Nested string",
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }

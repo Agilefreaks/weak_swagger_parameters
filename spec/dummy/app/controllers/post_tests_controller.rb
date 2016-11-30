@@ -16,21 +16,30 @@ class PostTestsController < ActionController::Base
     params do
       path do
         string :short_name, 'Short test name'
-        integer :count, 'Count of tests'
+        integer :count, 'Count of tests', min: 1, max: 100
+        string :path_enum, 'Path enum', enum: %w(a b c)
       end
       query do
         string :token, 'The token'
+        string :type, 'The type', enum: %w(a b c)
       end
       body do
         string :subject, 'The unit under test'
         string :context, 'The context of the test'
         integer :runs, 'Run times'
+        integer :position, 'Start Position', min: 1, max: 100
         boolean :passed, 'Passed'
         boolean :boolean_required, 'Boolean required', required: true
         string :string_required, 'String required', required: true
         integer :integer_required, 'Integer required', required: true
         string :string_enum, 'String enum', enum: %w(a b c)
         string :string_default, 'String default', default: 'origin'
+        integer :min_missing, 'Min missing', max: 100
+        integer :max_missing, 'Max missing', min: 1
+        model :nested_model, 'My nested model', ModelChildResponse
+        hash :my_hash, 'my hash' do
+          string :nested_string, 'Nested string'
+        end
       end
     end
 

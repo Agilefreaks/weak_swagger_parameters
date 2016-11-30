@@ -14,8 +14,12 @@ module WeakSwaggerParameters
       end
 
       def model(&block)
-        api_docs = WeakSwaggerParameters::Definitions::Model.new(docs_model_name, &block)
-        api_docs.apply_docs(self)
+        @wsp_node = WeakSwaggerParameters::Definitions::Model.new(docs_model_name, &block)
+        @wsp_node.apply_docs(self)
+      end
+
+      def wsp_node
+        @wsp_node
       end
 
       def docs_model_name
