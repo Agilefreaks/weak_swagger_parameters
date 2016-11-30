@@ -12,7 +12,8 @@ RSpec.describe PostTestsController, type: :controller do
         boolean_required: true,
         string_required: 'baz',
         integer_required: 12,
-        string_enum: 'a'
+        string_enum: 'a',
+        position: 1
       }
     end
 
@@ -174,6 +175,34 @@ RSpec.describe PostTestsController, type: :controller do
       context 'when value is array' do
         before :each do
           params[param_name] = []
+        end
+
+        its(:status) { is_expected.to eq 400 }
+      end
+    end
+
+    context 'body param is specified as number with' do
+      let(:param_name) { :position }
+
+      context 'value is between min and max value' do
+        before :each do
+          params[param_name] = 42
+        end
+
+        its(:status) { is_expected.to eq 201 }
+      end
+
+      context 'value is less than minimum value' do
+        before :each do
+          params[param_name] = 0
+        end
+
+        its(:status) { is_expected.to eq 400 }
+      end
+
+      context 'value is greater than maximum value' do
+        before :each do
+          params[param_name] = 1000
         end
 
         its(:status) { is_expected.to eq 400 }

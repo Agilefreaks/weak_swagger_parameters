@@ -27,7 +27,6 @@ module WeakSwaggerParameters
         result = result.merge(KNOWN_TYPES[options[:type]])
         result = result.merge(minimum: options[:min]) if options[:min].present?
         result = result.merge(maximum: options[:max]) if options[:max].present?
-
         result
       end
     end

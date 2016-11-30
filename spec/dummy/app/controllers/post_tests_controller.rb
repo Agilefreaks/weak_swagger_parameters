@@ -25,6 +25,7 @@ class PostTestsController < ActionController::Base
         string :subject, 'The unit under test'
         string :context, 'The context of the test'
         integer :runs, 'Run times'
+        integer :position, 'Start Position', min: 1, max: 100
         boolean :passed, 'Passed'
         boolean :boolean_required, 'Boolean required', required: true
         string :string_required, 'String required', required: true

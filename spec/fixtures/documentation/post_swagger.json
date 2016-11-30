@@ -41,9 +41,9 @@
           },
           {
             "name": "token",
-            "type": "string",
             "in": "query",
-            "description": "The token"
+            "description": "The token",
+            "type": "string"
           },
           {
             "name": "body",
@@ -68,6 +68,13 @@
                   "description": "Run times",
                   "type": "integer",
                   "format": "int32"
+                },
+                "position": {
+                  "description": "Start Position",
+                  "type": "integer",
+                  "format": "int32",
+                  "minimum": 1,
+                  "maximum": 100
                 },
                 "passed": {
                   "description": "Passed",
