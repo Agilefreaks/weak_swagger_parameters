@@ -11,6 +11,17 @@ module WeakSwaggerParameters
         instance_eval(&block) if block.present?
       end
 
+      def apply_validations(parent_node)
+        name = @name
+        param_definitions = child_definitions
+
+        parent_node.instance_eval do
+          hash name, strong: true do
+            param_definitions.each { |definition| definition.apply_validations(parent_node) }
+          end
+        end
+      end
+
       def apply_docs(parent_node)
         name = @name
         description = @description

@@ -10,6 +10,10 @@ module WeakSwaggerParameters
         instance_eval(&block) if block.present?
       end
 
+      def apply_validations(parent_node)
+        child_definitions.each { |definition| definition.apply_validations(parent_node) }
+      end
+
       def apply_docs(parent_node)
         model_name = @model_name
         definitions = child_definitions

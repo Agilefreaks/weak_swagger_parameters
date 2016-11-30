@@ -34,6 +34,10 @@ class PostTestsController < ActionController::Base
         integer :integer_required, 'Integer required', required: true
         string :string_enum, 'String enum', enum: %w(a b c)
         string :string_default, 'String default', default: 'origin'
+        model :nested_model, 'My nested model', ModelChildResponse
+        hash :my_hash, 'my hash' do
+          string :nested_string, 'Nested string'
+        end
       end
     end
 

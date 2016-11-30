@@ -281,6 +281,46 @@ RSpec.describe PostTestsController, type: :controller do
       end
     end
 
+    context 'body parameter is hash' do
+      let(:param_name) { :my_hash }
+
+      context 'when value is string' do
+        before :each do
+          params[param_name] = 'test'
+        end
+
+        its(:status) { is_expected.to eq 400 }
+      end
+
+      context 'when value is hash' do
+        before :each do
+          params[param_name] = {}
+        end
+
+        its(:status) { is_expected.to eq 201 }
+      end
+    end
+
+    context 'body parameter is model' do
+      let(:param_name) { :nested_model }
+
+      context 'when value is string' do
+        before :each do
+          params[param_name] = 'test'
+        end
+
+        its(:status) { is_expected.to eq 400 }
+      end
+
+      context 'when value is hash' do
+        before :each do
+          params[param_name] = {}
+        end
+
+        its(:status) { is_expected.to eq 201 }
+      end
+    end
+
     context 'path parameter is specified as number' do
       let(:param_name) { :count }
 

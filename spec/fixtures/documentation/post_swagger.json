@@ -129,6 +129,21 @@
                   "description": "String default",
                   "default": "origin",
                   "type": "string"
+                },
+                "nested_model": {
+                  "description": "My nested model",
+                  "type": "object",
+                  "$ref": "#/definitions/ModelChildResponse"
+                },
+                "my_hash": {
+                  "description": "my hash",
+                  "type": "object",
+                  "properties": {
+                    "nested_string": {
+                      "description": "Nested string",
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
