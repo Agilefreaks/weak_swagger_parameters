@@ -3,7 +3,7 @@ module WeakSwaggerParameters
   module Definitions
     class Parameter
       def initialize(location, type, name, description, options = nil)
-        @options = (options || {}).merge(location: location, type: type, name: name, description:description)
+        @options = (options || {}).merge(location: location, type: type, name: name, description: description)
       end
 
       def apply_validations(parent_node)
