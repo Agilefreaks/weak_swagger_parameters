@@ -16,7 +16,7 @@ class PostTestsController < ActionController::Base
     params do
       path do
         string :short_name, 'Short test name'
-        integer :count, 'Count of tests'
+        integer :count, 'Count of tests', min: 1, max: 100
       end
       query do
         string :token, 'The token'

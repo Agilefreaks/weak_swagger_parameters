@@ -251,5 +251,41 @@ RSpec.describe PostTestsController, type: :controller do
         its(:status) { is_expected.to eq(400) }
       end
     end
+
+    context 'path parameter is specified as number' do
+      let(:param_name) { :count }
+
+      context 'when value is not number' do
+        before :each do
+          params[param_name] = 'asd'
+        end
+
+        its(:status) { is_expected.to eq 400 }
+      end
+
+      context 'when value is string number' do
+        before :each do
+          params[param_name] = '42'
+        end
+
+        its(:status) { is_expected.to eq 201 }
+      end
+
+      context 'when value is greater than max' do
+        before :each do
+          params[param_name] = '20000'
+        end
+
+        its(:status) { is_expected.to eq 400 }
+      end
+
+      context 'when value is lower than min' do
+        before :each do
+          params[param_name] = '0'
+        end
+
+        its(:status) { is_expected.to eq 400 }
+      end
+    end
   end
 end
