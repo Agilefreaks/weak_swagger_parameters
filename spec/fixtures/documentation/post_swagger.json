@@ -24,43 +24,43 @@
         "parameters": [
           {
             "name": "short_name",
-            "in": "path",
-            "required": true,
             "description": "Short test name",
-            "type": "string"
+            "in": "path",
+            "type": "string",
+            "required": true
           },
           {
             "name": "count",
-            "in": "path",
-            "required": true,
             "description": "Count of tests",
+            "in": "path",
             "type": "integer",
             "format": "int32",
+            "required": true,
             "minimum": 1,
             "maximum": 100
           },
           {
             "name": "path_enum",
-            "in": "path",
-            "required": true,
             "description": "Path enum",
+            "in": "path",
             "enum": [
               "a",
               "b",
               "c"
             ],
-            "type": "string"
+            "type": "string",
+            "required": true
           },
           {
             "name": "token",
-            "in": "query",
             "description": "The token",
+            "in": "query",
             "type": "string"
           },
           {
             "name": "type",
-            "in": "query",
             "description": "The type",
+            "in": "query",
             "enum": [
               "a",
               "b",
@@ -129,6 +129,18 @@
                   "description": "String default",
                   "default": "origin",
                   "type": "string"
+                },
+                "min_missing": {
+                  "description": "Min missing",
+                  "type": "integer",
+                  "format": "int32",
+                  "maximum": 100
+                },
+                "max_missing": {
+                  "description": "Max missing",
+                  "type": "integer",
+                  "format": "int32",
+                  "minimum": 1
                 },
                 "nested_model": {
                   "description": "My nested model",
