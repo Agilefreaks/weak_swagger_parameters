@@ -16,19 +16,11 @@ module WeakSwaggerParameters
       end
 
       def self.range_options(options)
-        max = options[:max]
-        min = options[:min]
-        result = {}
+        return {} unless options.key?(:min) || options.key?(:max)
 
-        if min.present?
-          max ||= MAX_VALUE
-        elsif max.present?
-          min ||= MIN_VALUE
-        end
-
-        result[:only] = min...max if min.present? && max.present?
-
-        result
+        max = options[:max] || MAX_VALUE
+        min = options[:min] || MIN_VALUE
+        { only: min...max }
       end
     end
   end
