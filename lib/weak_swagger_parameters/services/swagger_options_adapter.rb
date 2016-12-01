@@ -21,10 +21,14 @@ module WeakSwaggerParameters
         result = result.merge(about_options(options))
         result = result.merge(enum_options(options))
         result = result.merge(default_options(options))
-        result = result.merge(KNOWN_TYPES[options[:type]])
+        result = result.merge(type_options(options))
         result = result.merge(required_options(options))
         result = result.merge(range_options(options))
         result
+      end
+
+      def self.type_options(options)
+        KNOWN_TYPES[options[:type]]
       end
 
       def self.about_options(options)
