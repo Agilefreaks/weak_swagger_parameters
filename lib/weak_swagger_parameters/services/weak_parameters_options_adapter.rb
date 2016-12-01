@@ -2,8 +2,8 @@
 module WeakSwaggerParameters
   module Services
     class WeakParametersOptionsAdapter
-      MAX_VALUE = 4611686018427387903
-      MIN_VALUE = -4611686018427387904
+      MAX_VALUE = 4_611_686_018_427_387_903
+      MIN_VALUE = -4_611_686_018_427_387_904
 
       def self.adapt(options)
         result = {}
