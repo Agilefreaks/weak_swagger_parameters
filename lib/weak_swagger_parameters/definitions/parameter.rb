@@ -4,8 +4,8 @@ module WeakSwaggerParameters
     class Parameter
       include WeakSwaggerParameters::Definitions::LeafDefinition
 
-      def initialize(location, type, name, description, options = nil)
-        @options = (options || {}).merge(location: location, type: type, name: name, description: description)
+      def initialize(location, type, name, description, options = {})
+        @options = options.merge(location: location, type: type, name: name, description: description)
       end
 
       def apply_docs(parent_node)

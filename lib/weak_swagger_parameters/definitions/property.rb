@@ -5,7 +5,7 @@ module WeakSwaggerParameters
       include WeakSwaggerParameters::Definitions::LeafDefinition
 
       def initialize(type, name, description, options = {})
-        @options = (options || {}).merge(name: name, type: type, description: description)
+        @options = options.merge(name: name, type: type, description: description)
       end
 
       def apply_docs(parent_node)

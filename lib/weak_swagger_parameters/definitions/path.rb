@@ -2,11 +2,11 @@
 module WeakSwaggerParameters
   module Definitions
     class Path < ParamContainer
-      def string(name, description, options = nil)
+      def string(name, description, options = {})
         register_definition(:string, name, description, options)
       end
 
-      def integer(name, description, options = nil)
+      def integer(name, description, options = {})
         register_definition(:integer, name, description, options)
       end
 
