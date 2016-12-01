@@ -325,17 +325,17 @@ RSpec.describe PostTestsController, type: :controller do
       let(:param_name) { :max_missing }
 
       context 'value is large' do
-         before :each do
-           params[param_name] = 5_000_000_000
-         end
+        before :each do
+          params[param_name] = 5_000_000_000
+        end
 
         its(:status) { is_expected.to eq 201 }
       end
 
       context 'value is below minimum' do
-         before :each do
-           params[param_name] = 0
-         end
+        before :each do
+          params[param_name] = 0
+        end
 
         its(:status) { is_expected.to eq 400 }
       end
@@ -345,17 +345,17 @@ RSpec.describe PostTestsController, type: :controller do
       let(:param_name) { :min_missing }
 
       context 'value is small' do
-         before :each do
-           params[param_name] = - 5_000_000_000
-         end
+        before :each do
+          params[param_name] = - 5_000_000_000
+        end
 
         its(:status) { is_expected.to eq 201 }
       end
 
       context 'value is above maximum' do
-         before :each do
-           params[param_name] = 101
-         end
+        before :each do
+          params[param_name] = 101
+        end
 
         its(:status) { is_expected.to eq 400 }
       end
