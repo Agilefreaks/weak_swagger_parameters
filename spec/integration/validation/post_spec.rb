@@ -12,6 +12,7 @@ RSpec.describe PostTestsController, type: :controller do
         boolean_required: true,
         string_required: 'baz',
         integer_required: 12,
+        float_required: 4.2,
         string_enum: 'a',
         position: 1
       }
@@ -254,6 +255,98 @@ RSpec.describe PostTestsController, type: :controller do
         end
 
         its(:status) { is_expected.to eq(400) }
+      end
+
+      context 'when value is object' do
+        before :each do
+          params[param_name] = {}
+        end
+
+        its(:status) { is_expected.to eq(400) }
+      end
+
+      context 'when value is array' do
+        before :each do
+          params[param_name] = []
+        end
+
+        its(:status) { is_expected.to eq(400) }
+      end
+
+      context 'when value is boolean' do
+        before :each do
+          params[param_name] = true
+        end
+
+        its(:status) { is_expected.to eq(400) }
+      end
+    end
+
+    context 'body parameter is specified as float' do
+      let(:param_name) { :float_required }
+
+      context 'when value is integr' do
+        before :each do
+          params[param_name] = 42
+        end
+
+        its(:status) { is_expected.to eq 201 }
+
+        it 'has permitted param' do
+          subject
+
+          expect(controller.permitted_params[param_name]).to eq(42)
+        end
+      end
+
+      context 'when value is stringified integer' do
+        before :each do
+          params[param_name] = '42'
+        end
+
+        its(:status) { is_expected.to eq 201 }
+
+        it 'has permitted param' do
+          subject
+
+          expect(controller.permitted_params[param_name]).to eq(42)
+        end
+      end
+
+      context 'when value is string field float' do
+        before :each do
+          params[param_name] = '4.2'
+        end
+
+        its(:status) { is_expected.to eq 201 }
+
+        it 'has permitted param' do
+          subject
+
+          expect(controller.permitted_params[param_name]).to eq(4.2)
+        end
+      end
+
+      context 'when value is invalid number string' do
+        before :each do
+          params[param_name] = 'abc'
+        end
+
+        its(:status) { is_expected.to eq(400) }
+      end
+
+      context 'when value is float' do
+        before :each do
+          params[param_name] = 4.2
+        end
+
+        its(:status) { is_expected.to eq(201) }
+
+        it 'has permitted param' do
+          subject
+
+          expect(controller.permitted_params[param_name]).to eq(4.2)
+        end
       end
 
       context 'when value is object' do

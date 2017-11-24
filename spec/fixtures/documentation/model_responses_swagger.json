@@ -105,6 +105,11 @@
               "description": "The baz of the model",
               "type": "boolean"
             },
+            "bav": {
+              "description": "The bav of the model",
+              "type": "number",
+              "format": "float"
+            },
             "child": {
               "description": "The Child",
               "type": "object",

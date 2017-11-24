@@ -76,7 +76,8 @@
               "required": [
                 "boolean_required",
                 "string_required",
-                "integer_required"
+                "integer_required",
+                "float_required"
               ],
               "properties": {
                 "subject": {
@@ -115,6 +116,11 @@
                   "description": "Integer required",
                   "type": "integer",
                   "format": "int32"
+                },
+                "float_required": {
+                  "description": "Float required",
+                  "type": "number",
+                  "format": "float"
                 },
                 "string_enum": {
                   "description": "String enum",
