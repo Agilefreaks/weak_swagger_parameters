@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module WeakSwaggerParameters
   module Controller
     extend ActiveSupport::Concern

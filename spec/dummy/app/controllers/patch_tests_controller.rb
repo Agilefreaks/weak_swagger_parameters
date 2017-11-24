@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class PatchTestsController < ActionController::Base
   include WeakSwaggerParameters::Controller
 

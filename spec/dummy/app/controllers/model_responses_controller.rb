@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ModelResponsesController < ActionController::Base
   include WeakSwaggerParameters::Controller
 

@@ -1,5 +1,5 @@
-# coding: utf-8
 # frozen_string_literal: true
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'weak_swagger_parameters/version'
@@ -21,15 +21,15 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'rails', '>= 4'
-  spec.add_dependency 'weak_parameters', '~> 0.4'
   spec.add_dependency 'swagger-blocks', '~> 1.3'
+  spec.add_dependency 'weak_parameters', '~> 0.4'
 
   spec.add_development_dependency 'bundler', '~> 1.12'
+  spec.add_development_dependency 'json-schema', '~> 2.6'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'sqlite3', '~> 1.3'
-  spec.add_development_dependency 'rspec-rails', '~> 3.4'
   spec.add_development_dependency 'rspec-its', '~> 1.2'
-  spec.add_development_dependency 'rubocop', '~> 0.42'
-  spec.add_development_dependency 'json-schema', '~> 2.6'
+  spec.add_development_dependency 'rspec-rails', '~> 3.4'
+  spec.add_development_dependency 'rubocop', '~> 0.51.0'
+  spec.add_development_dependency 'sqlite3', '~> 1.3'
 end

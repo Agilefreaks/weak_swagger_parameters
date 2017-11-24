@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'weak_swagger_parameters/definitions/leaf_definition'
 require 'weak_swagger_parameters/definitions/param_container'
 require 'weak_swagger_parameters/definitions/property_container'

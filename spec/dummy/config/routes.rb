@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Dummy::Application.routes.draw do
   resources :delete_tests
   resources :get_tests
