@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    weak_swagger_parameters (0.4.0)
+    weak_swagger_parameters (0.5.0)
       rails (>= 4)
       swagger-blocks (~> 1.3)
       weak_parameters (~> 0.4)
