@@ -18,6 +18,10 @@ module WeakSwaggerParameters
           register_definition(name, options, WeakSwaggerParameters::Definitions::Property.new(:integer, name, description, options))
         end
 
+        def float(name, description, options = {})
+          register_definition(name, options, WeakSwaggerParameters::Definitions::Property.new(:float, name, description, options))
+        end
+
         def hash(name, description, options = {}, &block)
           register_definition(name, options, WeakSwaggerParameters::Definitions::HashProperty.new(name, description, &block))
         end

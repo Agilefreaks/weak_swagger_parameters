@@ -32,6 +32,7 @@ class PostTestsController < ActionController::Base
         boolean :boolean_required, 'Boolean required', required: true
         string :string_required, 'String required', required: true
         integer :integer_required, 'Integer required', required: true
+        float :float_required, 'Float required', required: true
         string :string_enum, 'String enum', enum: %w(a b c)
         string :string_default, 'String default', default: 'origin'
         integer :min_missing, 'Min missing', max: 100
