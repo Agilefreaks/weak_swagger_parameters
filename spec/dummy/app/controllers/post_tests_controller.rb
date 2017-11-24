@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class PostTestsController < ActionController::Base
   include WeakSwaggerParameters::Controller
 
@@ -17,11 +18,11 @@ class PostTestsController < ActionController::Base
       path do
         string :short_name, 'Short test name'
         integer :count, 'Count of tests', min: 1, max: 100
-        string :path_enum, 'Path enum', enum: %w(a b c)
+        string :path_enum, 'Path enum', enum: %w[a b c]
       end
       query do
         string :token, 'The token'
-        string :type, 'The type', enum: %w(a b c)
+        string :type, 'The type', enum: %w[a b c]
       end
       body do
         string :subject, 'The unit under test'
@@ -33,7 +34,7 @@ class PostTestsController < ActionController::Base
         string :string_required, 'String required', required: true
         integer :integer_required, 'Integer required', required: true
         float :float_required, 'Float required', required: true
-        string :string_enum, 'String enum', enum: %w(a b c)
+        string :string_enum, 'String enum', enum: %w[a b c]
         string :string_default, 'String default', default: 'origin'
         integer :min_missing, 'Min missing', max: 100
         integer :max_missing, 'Max missing', min: 1

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
+
 module WeakSwaggerParameters
   module Definitions
     module PropertyContainer
       extend ActiveSupport::Concern
 
-      # rubocop:disable Metrics/BlockLength
       included do
         def string(name, description, options = {})
           register_definition(name, options, WeakSwaggerParameters::Definitions::Property.new(:string, name, description, options))

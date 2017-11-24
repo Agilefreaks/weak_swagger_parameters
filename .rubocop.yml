@@ -9,3 +9,10 @@ Style/Documentation:
 
 Style/TrivialAccessors:
   AllowDSLWriters: true
+
+Metrics/BlockLength:
+  Enabled: true
+  CountComments: false
+  Max: 50
+  Exclude:
+    - 'spec/**/*.rb'
