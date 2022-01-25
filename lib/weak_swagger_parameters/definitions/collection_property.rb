@@ -22,6 +22,10 @@ module WeakSwaggerParameters
           end
         end
       end
+
+      def apply_validations(_parent_node)
+        # TODO: figure out how to write a spec & validation for this
+      end
     end
   end
 end
