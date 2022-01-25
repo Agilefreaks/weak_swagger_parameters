@@ -21,8 +21,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'rails', '>= 4'
-  spec.add_dependency 'swagger-blocks', '~> 1.3'
-  spec.add_dependency 'weak_parameters', '~> 0.4'
+  spec.add_dependency 'swagger-blocks', '~> 3.0'
+  spec.add_dependency 'weak_parameters', '~> 0.5'
 
   spec.add_development_dependency 'bundler', '~> 1.12'
   spec.add_development_dependency 'json-schema', '~> 2.6'
