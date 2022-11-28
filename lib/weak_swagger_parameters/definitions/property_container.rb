@@ -31,7 +31,7 @@ module WeakSwaggerParameters
         end
 
         def array(name, description, options = {}, &block)
-          item_type = options[:item_type] || block || (raise ArgumentError('missing :item_type option'))
+          item_type = options[:item_type] || block || (raise StandardError('missing :item_type option'))
           register_definition(name, options, WeakSwaggerParameters::Definitions::ArrayProperty.new(name, description, item_type, &block))
         end
 
