@@ -30,6 +30,11 @@ module WeakSwaggerParameters
           register_definition(name, options, WeakSwaggerParameters::Definitions::ModelProperty.new(name, description, model_class))
         end
 
+        def array(name, description, options = {}, &block)
+          item_type = options[:item_type] || (raise ArgumentError("missing :item_type option"))
+          register_definition(name, options, WeakSwaggerParameters::Definitions::ArrayProperty.new(name, description, item_type, &block))
+        end
+
         def collection(name, description, model_class, options = {})
           register_definition(name, options, WeakSwaggerParameters::Definitions::CollectionProperty.new(name, description, model_class))
         end

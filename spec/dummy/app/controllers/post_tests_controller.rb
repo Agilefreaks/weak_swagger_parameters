@@ -42,6 +42,10 @@ class PostTestsController < ActionController::Base
         hash :my_hash, 'my hash' do
           string :nested_string, 'Nested string'
         end
+        array :my_array, 'my array' do
+          string :my_item_property, "Property string"
+        end
+        array :my_int_array, 'my int array', item_type: :integer
       end
     end
 
