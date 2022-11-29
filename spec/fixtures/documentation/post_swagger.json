@@ -162,6 +162,26 @@
                       "type": "string"
                     }
                   }
+                },
+                "my_array": {
+                  "description": "my array",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "my_item_property": {
+                        "description": "Property string",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "my_int_array": {
+                  "description": "my int array",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
                 }
               }
             }
